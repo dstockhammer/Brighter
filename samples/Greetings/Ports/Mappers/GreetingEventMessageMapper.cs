@@ -45,4 +45,40 @@ namespace Greetings.Ports.Mappers
             return greetingCommand;
         }
     }
+
+    public class GreetACommandMessageMapper : IAmAMessageMapper<GreetACommand>
+    {
+        public Message MapToMessage(GreetACommand request)
+        {
+            var header = new MessageHeader(messageId: request.Id, topic: "greeting.a.command", messageType: MessageType.MT_COMMAND);
+            var body = new MessageBody(JsonConvert.SerializeObject(request));
+            var message = new Message(header, body);
+            return message;
+        }
+
+        public GreetACommand MapToRequest(Message message)
+        {
+            var greetingCommand = JsonConvert.DeserializeObject<GreetACommand>(message.Body.Value);
+
+            return greetingCommand;
+        }
+    }
+
+    public class GreetBCommandMessageMapper : IAmAMessageMapper<GreetBCommand>
+    {
+        public Message MapToMessage(GreetBCommand request)
+        {
+            var header = new MessageHeader(messageId: request.Id, topic: "greeting.b.command", messageType: MessageType.MT_COMMAND);
+            var body = new MessageBody(JsonConvert.SerializeObject(request));
+            var message = new Message(header, body);
+            return message;
+        }
+
+        public GreetBCommand MapToRequest(Message message)
+        {
+            var greetingCommand = JsonConvert.DeserializeObject<GreetBCommand>(message.Body.Value);
+
+            return greetingCommand;
+        }
+    }
 }

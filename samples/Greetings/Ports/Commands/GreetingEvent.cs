@@ -38,4 +38,24 @@ namespace Greetings.Ports.Commands
 
         public string Greeting { get; set; }
     }
+
+    public class GreetACommand : Command
+    {
+        public GreetACommand(string greeting) : base(Guid.NewGuid())
+        {
+            Greeting = greeting;
+        }
+
+        public string Greeting { get; }
+    }
+
+    public class GreetBCommand : Command
+    {
+        public GreetBCommand(string greeting) : base(Guid.NewGuid())
+        {
+            Greeting = greeting;
+        }
+
+        public string Greeting { get; }
+    }
 }

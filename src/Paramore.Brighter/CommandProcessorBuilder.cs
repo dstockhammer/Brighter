@@ -108,6 +108,18 @@ namespace Paramore.Brighter
         }
 
         /// <summary>
+        /// Noes the handlers.
+        /// </summary>
+        /// <returns></returns>
+        public INeedPolicy NoHandlers()
+        {
+            _registry = new SubscriberRegistry();
+            _handlerFactory = new NullHandlerFactory();
+            _asyncHandlerFactory = new NullHandlerFactory();
+            return this;
+        }
+
+        /// <summary>
         /// Supplies the specified the policy registry, so we can use policies for Task Queues or in user-defined request handlers such as ExceptionHandler
         /// that provide quality of service concerns
         /// </summary>
@@ -181,6 +193,16 @@ namespace Paramore.Brighter
         }
 
         /// <summary>
+        /// InMemories the request context factory.
+        /// </summary>
+        /// <returns></returns>
+        public IAmACommandProcessorBuilder InMemoryRequestContextFactory()
+        {
+            _requestContextFactory = new InMemoryRequestContextFactory();
+            return this;
+        }
+
+        /// <summary>
         /// Builds the <see cref="CommandProcessor"/> from the configuration.
         /// </summary>
         /// <returns>CommandProcessor.</returns>
@@ -209,8 +231,7 @@ namespace Paramore.Brighter
                     asyncMessageStore: _asyncMessageStore,
                     messageProducer: _messagingGateway,
                     asyncMessageProducer: _asyncMessagingGateway,
-                    messageStoreTimeout: _messageStoreWriteTimeout
-                    );
+                    messageStoreTimeout: _messageStoreWriteTimeout);
             }
         }
     }
@@ -227,6 +248,12 @@ namespace Paramore.Brighter
         /// <param name="theRegistry">The registry.</param>
         /// <returns>INeedPolicy.</returns>
         INeedPolicy Handlers(HandlerConfiguration theRegistry);
+
+        /// <summary>
+        /// Noes the handlers.
+        /// </summary>
+        /// <returns></returns>
+        INeedPolicy NoHandlers();
     }
 
     /// <summary>
@@ -277,6 +304,12 @@ namespace Paramore.Brighter
         /// <param name="requestContextFactory">The request context factory.</param>
         /// <returns>IAmACommandProcessorBuilder.</returns>
         IAmACommandProcessorBuilder RequestContextFactory(IAmARequestContextFactory requestContextFactory);
+
+        /// <summary>
+        /// InMemories the request context factory.
+        /// </summary>
+        /// <returns></returns>
+        IAmACommandProcessorBuilder InMemoryRequestContextFactory();
     }
     /// <summary>
     /// Interface IAmACommandProcessorBuilder{CC2D43FA-BBC4-448A-9D0B-7B57ADF2655C}

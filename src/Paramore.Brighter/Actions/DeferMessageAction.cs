@@ -29,7 +29,7 @@ namespace Paramore.Brighter.Actions
     /// <summary>
     /// Class DeferMessageAction.
     /// Used to indicate that a message should be defered.
-    /// It's purpose is to allow messages received out of order to be delayed until
+    /// Its purpose is to allow messages received out of order to be delayed until
     /// missing messages have been processed
     /// </summary>
     public class DeferMessageAction : Exception

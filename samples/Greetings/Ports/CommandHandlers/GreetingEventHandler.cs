@@ -32,7 +32,33 @@ namespace Greetings.Ports.CommandHandlers
     {
         public override GreetingEvent Handle(GreetingEvent @event)
         {
-            Console.WriteLine("Received Greeting. Message Follows");
+            Console.WriteLine("Received Greeting EVENT. Message Follows");
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine(@event.Greeting);
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Message Ends");
+            return base.Handle(@event);
+        }
+    }
+
+    public class GreetingACommandHandler : RequestHandler<GreetACommand>
+    {
+        public override GreetACommand Handle(GreetACommand @event)
+        {
+            Console.WriteLine("Received Greeting A COMMAND. Message Follows");
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine(@event.Greeting);
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Message Ends");
+            return base.Handle(@event);
+        }
+    }
+
+    public class GreetingBCommandHandler : RequestHandler<GreetBCommand>
+    {
+        public override GreetBCommand Handle(GreetBCommand @event)
+        {
+            Console.WriteLine("Received Greeting B COMMAND. Message Follows");
             Console.WriteLine("----------------------------------");
             Console.WriteLine(@event.Greeting);
             Console.WriteLine("----------------------------------");

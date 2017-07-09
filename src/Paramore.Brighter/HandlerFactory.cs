@@ -31,7 +31,7 @@ namespace Paramore.Brighter
         private readonly RequestHandlerAttribute _attribute;
         private readonly IAmAHandlerFactory _factory;
         private readonly Type _messageType;
-        private IRequestContext _requestContext;
+        private readonly IRequestContext _requestContext;
 
         public HandlerFactory(RequestHandlerAttribute attribute, IAmAHandlerFactory factory, IRequestContext requestContext)
         {
@@ -45,7 +45,7 @@ namespace Paramore.Brighter
         {
             var handlerType = _attribute.GetHandlerType().MakeGenericType(_messageType);
             var handler = (IHandleRequests<TRequest>)_factory.Create(handlerType);
-            //Lod the context before the initializer - in case we want to use the context from within the initializer
+            //Load the context before the initializer - in case we want to use the context from within the initializer
             handler.Context = _requestContext;
             handler.InitializeFromAttributeParams(_attribute.InitializerParams());
             return handler;
